@@ -1,6 +1,7 @@
 import { query } from '../db.js';
 import { BaseRepository } from '../repository.js';
-import type { Team } from './team.schema.js';
+import type { Team, TeamWithPlayers } from './team.schema.js';
+import { playerRepository } from '../players/player.repository.js';
 
 class TeamRepository extends BaseRepository<Team> {
   constructor() {
@@ -15,6 +16,13 @@ class TeamRepository extends BaseRepository<Team> {
       'SELECT id, name, tag, country FROM team WHERE country = $1 ORDER BY name',
       [country],
     );
+  }
+
+  async findOneWithPlayers(id: number): Promise<TeamWithPlayers | null> {
+    const team = await this.findOne(id);
+    if (!team) return null;
+    const players = await playerRepository.findByTeam(id);
+    return { ...team, players };
   }
 }
 
