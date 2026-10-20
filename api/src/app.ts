@@ -7,8 +7,12 @@ import { healthRouter } from './health.router.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFound } from './middlewares/notFound.js';
 import { requireJson } from './middlewares/requireJson.js';
+import { requestLogger } from './middlewares/requestLogger.js';
 
 const app = express();
+
+// 0. Toujours en premier : une ligne dans les logs pour chaque requête.
+app.use(requestLogger);
 
 // 1. Lire les corps JSON dans req.body (sinon req.body vaut undefined). JSON illisible → erreur 400.
 app.use(express.json());
