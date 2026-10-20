@@ -7,6 +7,7 @@ import { validate, validateQuery } from '../middlewares/validate.js';
 import { games } from './game.repository.js';
 import { GamePatchSchema, GameQuerySchema, GameSchema, type GameInput, type GameQuery } from './game.schema.js';
 
+
 export const gameRouter = Router();
 
 // GET /api/games[?genre=fps]            hier : GameController::list()
