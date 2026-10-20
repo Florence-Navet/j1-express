@@ -1,10 +1,15 @@
 import { z } from 'zod';
+import type { PlayerSummary } from '../players/player.schema.js';
 
 export interface Team {
   id: number;
   name: string;
   tag: string;
   country: string;
+}
+
+export interface TeamWithPlayers extends Team {
+  players: PlayerSummary[];
 }
 
 export const TeamSchema = z.object({
