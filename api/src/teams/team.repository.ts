@@ -19,5 +19,5 @@ class TeamRepository extends BaseRepository<Team> {
 }
 
 
-
+export const teamRepository = new TeamRepository();
 export const teams = new TeamRepository();
